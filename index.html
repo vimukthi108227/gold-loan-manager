@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="si"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10243a"><title>Gold Loan Control</title>
+<style>
+:root{--navy:#10243a;--blue:#245d86;--teal:#0c927f;--gold:#d3a449;--bg:#f2f5f9;--ink:#1a2d40;--muted:#6d7d8d;--line:#e2e8ef;--red:#c34b4b;--green:#16845f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#e4f4ff 0,transparent 28%),linear-gradient(135deg,#f4f7fb,#eef3f9);font-family:system-ui,"Noto Sans Sinhala",sans-serif;color:var(--ink);animation:pageIn .55s ease both}header{background:linear-gradient(120deg,#10243a,#20577e);color:#fff;padding:20px 14px 30px}.wrap{max-width:1120px;margin:auto;padding:0 13px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-size:20px;font-weight:850}.sub{font-size:12px;color:#d7e4ee;margin-top:4px}main{margin-top:-14px;padding-bottom:35px}.notice{background:#fff7e5;border:1px solid #efd89d;color:#70531a;padding:12px 14px;border-radius:12px;font-size:12px;margin-bottom:13px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{background:linear-gradient(145deg,#fff,#fbfdff);border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:0 6px 20px #142e4310;transition:transform .22s ease,box-shadow .22s ease;animation:cardIn .55s ease both}.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #142e4318}.kpi small,.muted{color:var(--muted)}.kpi strong{display:block;font-size:22px;margin-top:6px}.section{font-size:18px;font-weight:850;margin:20px 0 10px}.loanGrid,.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.flex{display:flex;justify-content:space-between;align-items:center;gap:8px}.pill{font-size:11px;padding:5px 8px;border-radius:30px;background:#edf3f8;color:#38536b}.amount{font-size:26px;font-weight:850;margin:10px 0 2px}.bar{height:8px;background:#edf1f5;border-radius:30px;overflow:hidden;margin:10px 0}.bar span{display:block;height:100%;background:var(--teal)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stat{background:#f6f8fa;padding:9px;border-radius:9px}.stat small{display:block;font-size:11px;color:var(--muted)}.stat b{font-size:14px}.tabs{display:flex;gap:6px;overflow:auto;margin:15px 0}.tabs button{white-space:nowrap;background:#e5ecf3;color:#35516a}.tabs button.active{background:var(--navy);color:white}.panel{display:none}.panel.active{display:block}button{border:0;border-radius:10px;padding:10px 13px;background:linear-gradient(120deg,#245d86,#168d9a);color:white;font-weight:750;cursor:pointer;transition:transform .18s ease,filter .18s ease;box-shadow:0 3px 9px #245d8620}button:hover{transform:translateY(-2px);filter:brightness(1.06)}button:active{transform:scale(.98)}button.secondary{background:#e9eff5;color:var(--navy)}button.danger{background:#fff0f0;color:#a53b3b}label{display:block;font-size:12px;color:var(--muted);margin:9px 0 5px}input,select{width:100%;padding:10px;border:1px solid #d7e0e8;border-radius:9px;background:white;color:var(--ink);font:inherit}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{border-collapse:collapse;width:100%;min-width:650px;font-size:12px}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{background:#f7f9fb;color:var(--muted)}canvas{width:100%;height:220px;display:block}.loanChartGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.chartWrap{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:8px}.chartWrap canvas{height:150px;width:150px}.chartLegend{font-size:12px;line-height:1.9}.chartLegend b{font-size:15px}.uploadBox{border:1.5px dashed #83a9c4;border-radius:12px;padding:12px;background:#f4faff;margin-top:10px}.previewImg{max-width:100%;max-height:180px;border-radius:9px;margin-top:8px;display:none}.progress{height:7px;background:#e7edf3;border-radius:9px;overflow:hidden;margin-top:8px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#16a085,#4aa3df);transition:width .3s}@keyframes pageIn{from{opacity:0}to{opacity:1}}@keyframes cardIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}@keyframes countPop{0%{transform:scale(.96)}100%{transform:scale(1)}}.amount,.kpi strong{animation:countPop .45s ease both}.small{font-size:12px}.good{color:var(--green)}.bad{color:var(--red)}.footer{text-align:center;font-size:11px;color:var(--muted);margin:22px}
+@media(max-width:720px){.grid{grid-template-columns:1fr 1fr}.loanGrid,.two,.loanChartGrid{grid-template-columns:1fr}.chartWrap{grid-template-columns:125px 1fr}.chartWrap canvas{width:125px;height:125px}.brand{font-size:17px}.kpi strong{font-size:19px}}
+@media print{header,.tabs,.actions,button,.notice{display:none!important}.panel{display:block!important}.card{break-inside:avoid}}
+</style></head>
+<body>
+<header><div class="wrap head"><div><div class="brand">◈ Gold Loan Control</div><div class="sub">ඔයාගේ ණය දෙක · Payment, Interest & Balance Tracker</div></div><button class="secondary" onclick="window.print()">Print / PDF</button></div></header>
+
+<div id="cloudBar" style="background:#e9f4f2;color:#155e52;padding:9px 14px;font-size:12px;text-align:center">Cloud: Login කළ පසු Sync සක්‍රිය වේ</div>
+<div id="authBox" style="max-width:480px;margin:14px auto;background:#fff;border:1px solid #e2e8ef;border-radius:14px;padding:16px">
+<b>Cloud Sync Login</b><p style="font-size:12px;color:#68798a">ඔයාගේ Email සහ Password භාවිතා කර Login / Sign up කරන්න. එකම account එක Phone සහ Tablet දෙකේම භාවිතා කරන්න.</p>
+<label>Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com">
+<label>Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="අවම අක්ෂර 8ක්">
+<div style="display:flex;gap:8px;margin-top:12px"><button onclick="cloudSignIn()">Login</button><button class="secondary" onclick="cloudSignUp()">Create account</button><button class="secondary" onclick="cloudSignOut()">Logout</button></div>
+<div id="authMsg" style="font-size:12px;margin-top:9px;color:#526779"></div>
+</div>
+
+<main class="wrap">
+<div class="notice"><b>ආරම්භක දත්ත:</b> ණය 01 ශේෂය රු.677,800 (18K Necklace), ණය 02 ශේෂය රු.500,000 (22.3K Chain) ලෙස රිසිට්පත්වලින් කියවා ඇතුළත් කර ඇත. දෙවන රිසිට්පතේ අගයන් අතර නොගැළපීමක් ඇති බැවින් ශේෂ දෙකම බැංකුවෙන් අද දිනට තහවුරු කරන්න. 1.17% මාසික පොලිය දින ගණන අනුව ඇස්තමේන්තු කරයි; බැංකුවේ සැබෑ පොලී/ගාස්තු/කල්පිරීම වෙනස් විය හැකියි.</div>
+<div class="grid">
+<div class="card kpi"><small>ණය දෙකේ ඉතිරි එකතුව</small><strong id="kTotal">—</strong></div>
+<div class="card kpi"><small>මාසික අයවැය</small><strong id="kBudget">රු.70,000</strong></div>
+<div class="card kpi"><small>මෙතෙක් ගෙවූ මුළු මුදල</small><strong id="kPaid">—</strong></div><div class="card kpi"><small>දැනට නොගෙවූ පොලිය</small><strong id="kUnpaid">—</strong></div>
+<div class="card kpi"><small>ප්‍රාග්ධනය + නොගෙවූ පොලිය</small><strong id="kLiability">—</strong></div><div class="card kpi"><small>ඇස්තමේන්තු ණය නිමවන කාලය</small><strong id="kFinish">—</strong></div>
+</div>
+<div class="section">ණය දෙකේ තත්ත්වය</div><div class="loanGrid" id="loanCards"></div><div class="loanChartGrid"><div class="card"><b>ණය 01 – ගෙවූ / ඉතිරි</b><div class="chartWrap"><canvas id="loanDonut0" width="220" height="220"></canvas><div class="chartLegend" id="loanLegend0"></div></div></div><div class="card"><b>ණය 02 – ගෙවූ / ඉතිරි</b><div class="chartWrap"><canvas id="loanDonut1" width="220" height="220"></canvas><div class="chartLegend" id="loanLegend1"></div></div></div></div>
+<div class="tabs">
+<button class="active" data-tab="dash">Dashboard</button><button data-tab="add">වාරිකයක් ඇතුළත් කරන්න</button><button data-tab="loan0">ණය 01 විස්තර</button><button data-tab="loan1">ණය 02 විස්තර</button><button data-tab="plan">ඉදිරි වාරික සැලැස්ම</button><button data-tab="settings">Settings</button>
+</div>
+<section class="panel active" id="dash">
+<div class="two">
+<div class="card"><b>ණය ශේෂය අඩුවන Chart</b><canvas id="lineChart" width="700" height="260"></canvas><div class="small muted">රු.70,000 මාසික අයවැය අනුව ඇස්තමේන්තුව.</div></div>
+<div class="card"><b>ණය දෙකේ වත්මන් බෙදීම</b><canvas id="donut" width="500" height="260"></canvas><div id="legend" class="small"></div></div>
+</div>
+<div class="section">ඊළඟ මාසයට මගේ යෝජනාව</div>
+<div class="card"><div class="flex"><div><small class="muted">මාසික මුළු අයවැය</small><div class="amount" id="suggestTotal">—</div></div><span class="pill">කල්පිරීමේ ප්‍රමුඛතාව</span></div><div id="suggestText" class="small"></div><p class="small muted">මෙය පොලිය දෙකටම වෙන් කර ඉතිරි මුදල කල්පිරීම ළඟ ණයේ ප්‍රාග්ධනයට යොදන යෝජනාවකි. බැංකුවෙන් due date/renewal තහවුරු කරන්න.</p></div>
+<div class="section">ණය අනුව සාරාංශය</div><div class="tablewrap"><table><thead><tr><th>ණය</th><th>ඉතිරි මුදල</th><th>දැනට එකතු වූ ඇස්තමේන්තු පොලිය</th><th>මාසික පොලිය (30 දින)</th><th>කල්පිරීම</th><th>ඇස්තමේන්තු අවසන්</th></tr></thead><tbody id="summary"></tbody></table></div>
+</section>
+<section class="panel" id="add">
+<div class="two">
+<div class="card"><b>වාරික ගෙවීම ඇතුළත් කරන්න</b>
+<label>කුමන ණයටද?</label><select id="pLoan"><option value="0">ණය 01 – 18K Necklace</option><option value="1">ණය 02 – 22.3K Chain</option></select>
+<div class="row"><div><label>ගෙවූ දිනය</label><input type="date" id="pDate"></div><div><label>ඇත්තටම ගෙවූ මුළු මුදල (රු.)</label><input type="number" min="0" step=".01" id="pAmount" placeholder="උදා: 35000"></div></div>
+<div class="row"><div><label>රිසිට්පතේ පොලිය (රු.)</label><input type="number" min="0" step=".01" id="pInterest" placeholder="නොදන්නේ නම් හිස්ව තබන්න"></div><div><label>වෙනත් ගාස්තු (රු.)</label><input type="number" min="0" step=".01" id="pFees" placeholder="නැත්නම් 0"></div></div>
+<label>සටහන / රිසිට් අංකය</label><input id="pNote" placeholder="උදා: Installment 5 / receipt no."><div class="uploadBox"><b>රිසිට්පත Upload කරන්න</b><p class="small muted">JPG / PNG / PDF නොව, පළමුව JPG හෝ PNG රූපයක් තෝරන්න. OCR මඟින් හඳුනාගත් දිනය, මුළු ගෙවීම සහ පොලිය පරීක්ෂා කර පසුව Save කරන්න.</p><input id="receiptFile" type="file" accept="image/*" onchange="scanReceipt(event)"><img id="receiptPreview" class="previewImg" alt="Receipt preview"><div class="progress"><span id="ocrProgress"></span></div><div id="receiptMsg" class="small muted" style="margin-top:7px">රිසිට්පතක් තෝරාගන්න.</div></div>
+<div class="actions"><button onclick="addPayment()">ගෙවීම සුරකින්න</button><button class="secondary" onclick="previewPayment()">ගණනය පෙන්වන්න</button></div>
+<div class="notice" style="margin-top:12px;margin-bottom:0">පොලිය දන්නවා නම් රිසිට්පතේ තිබෙන පොලිය ඇතුළත් කරන්න. හිස් නම් අවසන් ගෙවූ දිනයේ සිට ගෙවූ දිනය දක්වා 1.17% අනුපාතයෙන් ඇස්තමේන්තු කරයි. මුළු ගෙවීමෙන් පොලිය හා ගාස්තු අඩු කළ පසු ඉතිරිය ප්‍රාග්ධනයෙන් අඩු කරයි.</div>
+<div id="preview" class="small" style="margin-top:10px"></div>
+</div>
+<div class="card"><b>ගෙවීම් ඉතිහාසය</b><div class="tablewrap" style="margin-top:10px"><table><thead><tr><th>දිනය</th><th>ණය</th><th>ගෙවූ මුළු මුදල</th><th>පොලිය</th><th>ගාස්තු</th><th>ප්‍රාග්ධනය අඩු වූ මුදල</th><th>ඉතිරි ශේෂය</th><th></th></tr></thead><tbody id="history"></tbody></table></div></div>
+</div></section>
+<section class="panel" id="loan0"><div class="card" id="detail0"></div></section><section class="panel" id="loan1"><div class="card" id="detail1"></div></section>
+<section class="panel" id="plan"><div class="card"><b>ඉදිරි මාසික වාරික සැලැස්ම</b><p class="small muted">දෙකේ පොලිය පළමුව වෙන් කර ඉතිරි මුදල කල්පිරීම ළඟ ණයට යොදන ආදර්ශ ගණනයකි. ඇත්තටම ගෙවන මුදල වෙනස් නම් Payment Entry එකෙන් ඇතුළත් කරන්න.</p><div class="tablewrap"><table><thead><tr><th>මාසය</th><th>ණය 01 ගෙවීම</th><th>ණය 01 පොලිය</th><th>ණය 01 ඉතිරි</th><th>ණය 02 ගෙවීම</th><th>ණය 02 පොලිය</th><th>ණය 02 ඉතිරි</th></tr></thead><tbody id="planRows"></tbody></table></div></div></section>
+<section class="panel" id="settings"><div class="two"><div class="card"><b>බැංකු තොරතුරු යාවත්කාලීන කරන්න</b><p class="small muted">ශේෂය යනු දැනට ඉතිරි ප්‍රාග්ධනයයි. දැනට එකතු වී ඇති නමුත් තවම නොගෙවූ පොලිය පහතින් වෙනම ඇතුළත් කරන්න.</p><div id="fields"></div><label>මාසික මුළු අයවැය (රු.)</label><input id="budget" type="number" min="0"><div class="actions"><button onclick="saveSettings()">වෙනස්කම් සුරකින්න</button><button class="secondary" onclick="exportCSV()">CSV Export</button><button class="danger" onclick="resetAll()">සියලු දත්ත Reset</button></div></div><div class="card"><b>App එක භාවිතා කරන ආකාරය</b><ol class="small"><li>බැංකුවෙන් අද දිනට ශේෂය සහ දැනට ගෙවිය යුතු පොලිය තහවුරු කර Settings තුළ යාවත්කාලීන කරන්න.</li><li>සෑම වාරිකයකම රිසිට්පත Upload කර OCR දත්ත පරීක්ෂා කර ගෙවීම සුරකින්න.</li><li>රිසිට්පතේ පොලිය තිබේ නම් එය ඇතුළත් කරන්න. එවිට ප්‍රාග්ධනය ස්වයංක්‍රීයව ගණනය වේ.</li><li>Dashboard සහ Loan Details තුළ අලුත් ශේෂය, පොලිය සහ ගෙවීම් ඉතිහාසය බලන්න.</li><li>අවශ්‍ය විට CSV backup එකක් ගන්න.</li></ol><p class="small muted">Login කර ඇති විට දත්ත Supabase Cloud එකට Sync වේ. රිසිට්පත් Cloud Storage තුළ සුරැකේ. මෙය බැංකුවේ නිල App එකක් නොවේ.</p></div></div></section>
+<div class="footer">Gold Loan Control · Personal tracker · All projections are estimates, not a bank settlement quotation.</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script>
+const SUPABASE_URL="https://rysaxwohobqqfeapzjtm.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_UrML-xUhWdFoQnY8IbOClQ_KEceUKdh";
+const cloudClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+let cloudUser=null, cloudReady=false, syncTimer=null, pendingReceiptPath=null;
+const KEY='goldLoanControl_v3';
+const seed={budget:70000,loans:[
+{name:'ණය 01 – 18K Necklace',balance:677800,rate:1.17,pawn:'2025-12-10',due:'2026-12-10',lastPaid:'2026-08-28',unpaidInterest:0,verified:false},
+{name:'ණය 02 – 22.3K Chain',balance:500000,rate:1.17,pawn:'2026-02-03',due:'2027-02-03',lastPaid:'2026-08-28',unpaidInterest:0,verified:false}],
+payments:[
+{loan:0,date:'2026-08-28',amount:15872,interest:7372,fees:0,principal:8500,after:677800,note:'රිසිට්පතේ පෙන්වා ඇති පෙර ගෙවීම – ආරම්භක ශේෂයට දැනටමත් ඇතුළත්',historical:true},
+{loan:1,date:'2026-08-28',amount:44183,interest:5783,fees:0,principal:38400,after:500000,note:'රිසිට්පතේ පෙන්වා ඇති පෙර ගෙවීම – ආරම්භක ශේෂයට දැනටමත් ඇතුළත්',historical:true}]};
+let s;try{s=JSON.parse(localStorage.getItem(KEY))||structuredClone(seed)}catch(e){s=structuredClone(seed)}
+const $=id=>document.getElementById(id),money=n=>'රු. '+Math.round(Number(n)||0).toLocaleString('en-US'),num=n=>(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}),df=d=>d?new Date(d+'T00:00:00').toLocaleDateString('en-GB'):'—';
+function save(){localStorage.setItem(KEY,JSON.stringify(s));render();if(cloudUser){clearTimeout(syncTimer);syncTimer=setTimeout(()=>cloudPush().catch(e=>cloudStatus('Sync error: '+e.message)),700)}}
+function bal(i){return Math.max(0,s.loans[i].balance-s.payments.filter(p=>p.loan===i&&!p.historical).reduce((a,p)=>a+p.principal,0))}
+function days(a,b){return Math.max(0,Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/86400000))}
+function accrued(i,date){let l=s.loans[i],d=days(l.lastPaid,date);return (bal(i)*l.rate/100)*(d/30.4375)+Number(l.unpaidInterest||0)}
+function estimate(){let b=[bal(0),bal(1)],rows=[],finish=[null,null],totalInt=0,now=new Date();now.setDate(1);let order=[0,1].sort((a,c)=>new Date(s.loans[a].due)-new Date(s.loans[c].due));
+for(let m=0;m<360&&b.some(v=>v>.01);m++){let ints=b.map((v,i)=>v>0?v*s.loans[i].rate/100:0),allocation=[0,0],left=s.budget;
+for(let i of order){let interest=ints[i],need=b[i]+interest;let minimum=Math.min(left,interest);allocation[i]+=minimum;left-=minimum}
+for(let i of order){if(left<=0)break;let need=b[i]+ints[i]-allocation[i];let v=Math.min(left,need);allocation[i]+=v;left-=v}
+let ip=[0,0];for(let i=0;i<2;i++){ip[i]=Math.min(ints[i],allocation[i]);let principal=Math.max(0,allocation[i]-ip[i]);b[i]=Math.max(0,b[i]-principal);if(b[i]<=.01&&!finish[i])finish[i]=new Date(now.getFullYear(),now.getMonth()+m,1);totalInt+=ip[i]}
+rows.push({date:new Date(now.getFullYear(),now.getMonth()+m,1),a0:allocation[0],i0:ip[0],b0:b[0],a1:allocation[1],i1:ip[1],b1:b[1]})}
+return{rows,finish,totalInt}}
+function render(){let b=[bal(0),bal(1)],x=estimate(),total=b[0]+b[1],payments=s.payments,paid=payments.reduce((a,p)=>a+p.amount,0);
+$('kTotal').textContent=money(total);$('kBudget').textContent=money(s.budget);$('kPaid').textContent=money(paid);let unpaid=s.loans.reduce((a,l)=>a+(Number(l.unpaidInterest)||0),0);$('kUnpaid').textContent=money(unpaid);$('kLiability').textContent=money(total+unpaid);$('kFinish').textContent=x.rows.length?df(x.rows.at(-1).date.toISOString().slice(0,10)):'—';
+$('loanCards').innerHTML=s.loans.map((l,i)=>{let principalPaid=l.balance-b[i],loanPaid=s.payments.filter(p=>p.loan===i).reduce((a,p)=>a+p.amount,0);return `<div class="card"><div class="flex"><b>${l.name}</b><span class="pill">${l.verified?'ශේෂය තහවුරුයි':'ශේෂය තහවුරු කරන්න'}</span></div><div class="amount">${money(b[i])}</div><small class="muted">ඉතිරි ප්‍රාග්ධනය</small><div class="bar"><span style="width:${Math.min(100,100*principalPaid/Math.max(1,l.balance))}%"></span></div><div class="stats"><div class="stat"><small>මෙතෙක් ගෙවූ මුළු මුදල</small><b>${money(loanPaid)}</b></div><div class="stat"><small>මාස 1ක පොලිය (ආසන්න)</small><b>${money(b[i]*l.rate/100)}</b></div><div class="stat"><small>පොලී අනුපාතය</small><b>${l.rate}%</b></div><div class="stat"><small>කල්පිරීම</small><b>${df(l.due)}</b></div><div class="stat"><small>ඇස්තමේන්තු අවසන්</small><b>${x.finish[i]?df(x.finish[i].toISOString().slice(0,10)):'—'}</b></div></div></div>`}).join('');
+let dueOrder=[0,1].sort((a,c)=>new Date(s.loans[a].due)-new Date(s.loans[c].due)),interest=b.map((v,i)=>v*s.loans[i].rate/100),allocation=[0,0],left=s.budget;
+dueOrder.forEach(i=>{let min=Math.min(left,interest[i]);allocation[i]+=min;left-=min});dueOrder.forEach(i=>{if(left>0){let extra=Math.min(left,b[i]);allocation[i]+=extra;left-=extra}});
+$('suggestTotal').textContent=money(allocation[0]+allocation[1]);$('suggestText').innerHTML=`${s.loans[0].name}: <b>${money(allocation[0])}</b> (පොලිය ${money(Math.min(interest[0],allocation[0]))})<br>${s.loans[1].name}: <b>${money(allocation[1])}</b> (පොලිය ${money(Math.min(interest[1],allocation[1]))})`;
+$('summary').innerHTML=s.loans.map((l,i)=>`<tr><td>${l.name}</td><td>${money(b[i])}</td><td>${money(l.unpaidInterest)}</td><td>${money(b[i]*l.rate/100)}</td><td>${df(l.due)}</td><td>${x.finish[i]?df(x.finish[i].toISOString().slice(0,10)):'—'}</td></tr>`).join('');
+$('planRows').innerHTML=x.rows.slice(0,48).map(r=>`<tr><td>${r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'})}</td><td>${money(r.a0)}</td><td>${money(r.i0)}</td><td>${money(r.b0)}</td><td>${money(r.a1)}</td><td>${money(r.i1)}</td><td>${money(r.b1)}</td></tr>`).join('');
+$('history').innerHTML=s.payments.slice().reverse().map((p,j)=>`<tr><td>${df(p.date)}</td><td>${p.loan+1}</td><td>${money(p.amount)}</td><td>${money(p.interest)}</td><td>${money(p.fees)}</td><td>${money(p.principal)}</td><td>${money(p.after)}</td><td>${p.historical?'පෙර':'<button class="danger" onclick="delPayment('+ (s.payments.length-1-j)+')">×</button>'}</td></tr>`).join('');
+for(let i=0;i<2;i++){let l=s.loans[i],ps=s.payments.filter(p=>p.loan===i),paidP=ps.reduce((a,p)=>a+p.principal,0),paidI=ps.reduce((a,p)=>a+p.interest,0),paidA=ps.reduce((a,p)=>a+p.amount,0);$('detail'+i).innerHTML=`<h3>${l.name}</h3><div class="stats"><div class="stat"><small>දැනට ඉතිරි ප්‍රාග්ධනය</small><b>${money(bal(i))}</b></div><div class="stat"><small>දැනට එකතු වී ඇති නොගෙවූ පොලිය</small><b>${money(l.unpaidInterest)}</b></div><div class="stat"><small>මෙම App එකට ඇතුළත් කළ මුළු ගෙවීම්</small><b>${money(paidA)}</b></div><div class="stat"><small>ඇතුළත් කළ පොලී ගෙවීම්</small><b>${money(paidI)}</b></div><div class="stat"><small>ප්‍රාග්ධනය අඩු කළ මුදල</small><b>${money(paidP)}</b></div><div class="stat"><small>ඊළඟ මාසයක පොලිය (දළ)</small><b>${money(bal(i)*l.rate/100)}</b></div></div><p>උකස් දිනය: <b>${df(l.pawn)}</b> · කල්පිරීම: <b>${df(l.due)}</b> · අවසන් ගෙවූ දිනය: <b>${df(l.lastPaid)}</b></p><p class="small muted">අද දිනට ගෙවිය යුතු මුළු මුදල බැංකුවෙන් ලබාගන්න. ප්‍රාග්ධන ශේෂය පමණක් මුළු redemption amount නොවේ.</p><button onclick="document.querySelector('[data-tab=settings]').click()">මෙම ණයේ දත්ත වෙනස් කරන්න</button>`}
+drawCharts(x,b);for(let i=0;i<2;i++){let paidLoan=s.payments.filter(p=>p.loan===i).reduce((a,p)=>a+p.amount,0);drawLoanDonut('loanDonut'+i,'loanLegend'+i,b[i],paidLoan,i)}}
+function drawCharts(x,b){let c=$('lineChart'),ctx=c.getContext('2d'),w=c.width,h=c.height,rs=x.rows.slice(0,24),max=Math.max(1,...rs.map(r=>r.b0+r.b1));ctx.clearRect(0,0,w,h);ctx.strokeStyle='#e2e8ef';ctx.fillStyle='#6d7d8d';ctx.font='12px sans-serif';for(let j=0;j<=4;j++){let y=15+j*(h-45)/4;ctx.beginPath();ctx.moveTo(48,y);ctx.lineTo(w-10,y);ctx.stroke();ctx.fillText(Math.round(max*(4-j)/4/1000)+'k',3,y+4)}ctx.beginPath();rs.forEach((r,i)=>{let xx=50+i*(w-65)/Math.max(1,rs.length-1),yy=15+(h-45)*(1-(r.b0+r.b1)/max);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)});ctx.strokeStyle='#0c927f';ctx.lineWidth=3;ctx.stroke();
+let d=$('donut').getContext('2d'),dc=$('donut'),cx=250,cy=120,r=83,inner=48,total=b[0]+b[1],start=-Math.PI/2;d.clearRect(0,0,dc.width,dc.height);let colors=['#245d86','#d3a449'];b.forEach((v,i)=>{let end=start+(total?v/total:0)*Math.PI*2;d.beginPath();d.arc(cx,cy,r,start,end);d.arc(cx,cy,inner,end,start,true);d.closePath();d.fillStyle=colors[i];d.fill();start=end});d.fillStyle='#172d40';d.textAlign='center';d.font='bold 18px sans-serif';d.fillText('Debt',cx,cy);$('legend').innerHTML=`<span style="color:#245d86">●</span> ණය 01: ${money(b[0])} &nbsp; <span style="color:#d3a449">●</span> ණය 02: ${money(b[1])}`}
+function drawLoanDonut(canvasId,legendId,principal,paid,loanIndex){
+ let cv=$(canvasId),g=cv.getContext('2d'),cx=110,cy=110,r=82,inner=51,total=Math.max(1,principal+paid),start=-Math.PI/2;
+ g.clearRect(0,0,220,220);let vals=[Math.max(0,paid),Math.max(0,principal)],cols=['#19a887','#245d86'];
+ vals.forEach((v,i)=>{let end=start+(v/total)*Math.PI*2;g.beginPath();g.arc(cx,cy,r,start,end);g.arc(cx,cy,inner,end,start,true);g.closePath();g.fillStyle=cols[i];g.fill();start=end});
+ g.fillStyle='#17344d';g.textAlign='center';g.font='bold 15px sans-serif';g.fillText('Loan '+(loanIndex+1),cx,cy-2);g.font='11px sans-serif';g.fillText(Math.round(100*paid/total)+'% paid',cx,cy+17);
+ $(legendId).innerHTML=`<span style="color:#19a887">●</span> මෙතෙක් ගෙවූ මුළු මුදල<br><b>${money(paid)}</b><br><span style="color:#245d86">●</span> දැනට ඉතිරි ප්‍රාග්ධනය<br><b>${money(principal)}</b>`;
+}
+function previewPayment(){let i=+$('pLoan').value,amount=+$('pAmount').value,date=$('pDate').value||new Date().toISOString().slice(0,10),fees=+$('pFees').value||0,typed=$('pInterest').value,it=typed===''?accrued(i,date):+typed,principal=Math.max(0,amount-it-fees);$('preview').innerHTML=`<b>ගෙවීමේ ගණනය (ඇස්තමේන්තුව)</b><br>මුළු ගෙවීම: ${money(amount)}<br>පොලිය: ${money(it)} ${typed===''?'(දින ගණන අනුව ඇස්තමේන්තු)':'(රිසිට්පතෙන්)' }<br>ගාස්තු: ${money(fees)}<br>ප්‍රාග්ධනය අඩු වීම: <b class="good">${money(principal)}</b><br>නව ඉතිරි ප්‍රාග්ධනය: <b>${money(Math.max(0,bal(i)-principal))}</b>`}
+function addPayment(){let i=+$('pLoan').value,amount=+$('pAmount').value,date=$('pDate').value||new Date().toISOString().slice(0,10),fees=+$('pFees').value||0,typed=$('pInterest').value,it=typed===''?accrued(i,date):+typed;if(amount<=0)return alert('ගෙවූ මුළු මුදල ඇතුළත් කරන්න.');if(it+fees>amount+.001)return alert('පොලිය සහ ගාස්තු මුළු ගෙවීමට වඩා වැඩියි.');let principal=amount-it-fees;if(principal>bal(i)+.01)return alert('ප්‍රාග්ධන කොටස ඉතිරි ශේෂයට වඩා වැඩියි.');let after=Math.max(0,bal(i)-principal);s.payments.push({loan:i,date,amount,interest:it,fees,principal,after,note:$('pNote').value,receiptPath:pendingReceiptPath,historical:false});s.loans[i].lastPaid=date;s.loans[i].unpaidInterest=0;save();pendingReceiptPath=null;$('receiptFile').value='';$('receiptPreview').style.display='none';$('receiptMsg').textContent='ගෙවීම සුරැකුණා.';$('pAmount').value=$('pInterest').value=$('pFees').value=$('pNote').value='';$('preview').textContent='';alert('ගෙවීම සුරැකුවා. ශේෂය යාවත්කාලීන කළා.')}
+async function scanReceipt(ev){
+ const file=ev.target.files&&ev.target.files[0];if(!file)return;
+ if(!file.type.startsWith('image/')){alert('කරුණාකර JPG හෝ PNG රූපයක් තෝරන්න.');return}
+ const preview=$('receiptPreview');preview.src=URL.createObjectURL(file);preview.style.display='block';
+ $('receiptMsg').textContent='රිසිට්පත කියවමින්...';$('ocrProgress').style.width='5%';
+ try{
+  if(!window.Tesseract)throw new Error('OCR library load වුණේ නැහැ. Internet connection එක පරීක්ෂා කරන්න.');
+  const result=await Tesseract.recognize(file,'eng',{logger:m=>{if(m.status==='recognizing text')$('ocrProgress').style.width=Math.round(m.progress*75)+'%'}});
+  const txt=result.data.text||'';let lines=txt.split(/\\n/).map(x=>x.trim()).filter(Boolean),joined=lines.join(' ');
+  // OCR guesses are suggestions only; user must verify against the receipt.
+  let amount=null,interest=null,date=null;
+  const amountPatterns=[/(?:total\\s*(?:paid|payment|amount)|amount\\s*paid|cash\\s*received|payment\\s*amount)[^\\d]{0,18}([\\d,]+\\.?\\d{0,2})/i,/(?:paid|payment)[^\\d]{0,12}([\\d,]+\\.?\\d{0,2})/i];
+  const intPattern=/(?:interest|int\\.?)[^\\d]{0,18}([\\d,]+\\.?\\d{0,2})/i;
+  for(const pat of amountPatterns){let m=joined.match(pat);if(m){amount=Number(m[1].replace(/,/g,''));if(amount>0)break}}
+  let im=joined.match(intPattern);if(im)interest=Number(im[1].replace(/,/g,''));
+  let dm=joined.match(/\\b(\\d{1,2})[\\/-](\\d{1,2})[\\/-](20\\d{2})\\b/);
+  if(dm){let a=+dm[1],b=+dm[2],y=dm[3],dd=a>12?a:b,mm=a>12?b:a;date=`${y}-${String(mm).padStart(2,'0')}-${String(dd).padStart(2,'0')}`}
+  if(amount)$('pAmount').value=amount;
+  if(interest!==null)$('pInterest').value=interest;
+  if(date)$('pDate').value=date;
+  $('ocrProgress').style.width='100%';
+  $('receiptMsg').innerHTML=`OCR කියවීම අවසන්. හඳුනාගත් අගයන් පරීක්ෂා කරන්න.<br><small>${txt.slice(0,550).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</small>`;
+  if(cloudUser){
+   const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_'),path=`${cloudUser.id}/${Date.now()}_${safeName}`;
+   const {error}=await cloudClient.storage.from('gold-loan-receipts').upload(path,file,{upsert:false,contentType:file.type});
+   if(error)throw error;pendingReceiptPath=path;$('receiptMsg').innerHTML+=' <b class="good">රිසිට්පත Cloud Storage වෙත Upload කළා.</b>';
+  }else{
+   $('receiptMsg').innerHTML+=' <b class="bad">රූපය Cloud එකට Upload කිරීමට Login වන්න.</b>';
+  }
+ }catch(e){$('receiptMsg').textContent='රිසිට්පත කියවීම / Upload කිරීම අසාර්ථකයි: '+e.message}
+}
+function delPayment(i){if(confirm('මෙම ගෙවීම ඉවත් කරන්නද?')){s.payments.splice(i,1);save()}}
+function buildFields(){$('fields').innerHTML=s.loans.map((l,i)=>`<h4>${l.name}</h4><div class="row"><div><label>තහවුරු කළ ඉතිරි ප්‍රාග්ධනය (රු.)</label><input id="bal${i}" type="number" value="${l.balance}"></div><div><label>මාසික පොලී අනුපාතය (%)</label><input id="rate${i}" type="number" step=".01" value="${l.rate}"></div></div><div class="row"><div><label>උකස් දිනය</label><input id="pawn${i}" type="date" value="${l.pawn}"></div><div><label>කල්පිරීමේ දිනය</label><input id="due${i}" type="date" value="${l.due}"></div></div><div class="row"><div><label>අවසන් ගෙවූ දිනය</label><input id="last${i}" type="date" value="${l.lastPaid}"></div><div><label>දැනට නොගෙවූ පොලිය (රු.)</label><input id="unpaid${i}" type="number" value="${l.unpaidInterest}"></div></div><label><input type="checkbox" id="ver${i}" ${l.verified?'checked':''}> බැංකුවෙන් ශේෂය තහවුරු කළා</label>`).join('');$('budget').value=s.budget}
+function saveSettings(){s.budget=+$('budget').value||0;s.loans.forEach((l,i)=>{l.balance=+$('bal'+i).value||0;l.rate=+$('rate'+i).value||0;l.pawn=$('pawn'+i).value;l.due=$('due'+i).value;l.lastPaid=$('last'+i).value;l.unpaidInterest=+$('unpaid'+i).value||0;l.verified=$('ver'+i).checked});save();alert('වෙනස්කම් සුරැකුවා.')}
+function exportCSV(){let rows=[['Date','Loan','Amount','Interest','Fees','Principal','Balance after','Note'],...s.payments.map(p=>[p.date,s.loans[p.loan].name,p.amount,p.interest,p.fees,p.principal,p.after,p.note||''])],csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\n'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv'})),a=document.createElement('a');a.href=url;a.download='gold-loan-payment-history.csv';a.click();URL.revokeObjectURL(url)}
+function resetAll(){if(confirm('මෙම උපාංගයේ සියලුම ගෙවීම් සහ වෙනස්කම් මකා දමන්නද?')){s=structuredClone(seed);localStorage.removeItem(KEY);buildFields();render()}}
+
+function cloudStatus(msg){$('cloudBar').textContent=msg}
+function authMessage(msg){$('authMsg').textContent=msg}
+async function cloudSignUp(){try{let email=$('authEmail').value.trim(),password=$('authPassword').value;if(!email||password.length<8)return authMessage('Email එක සහ අවම අක්ෂර 8ක Password එකක් ඇතුළත් කරන්න.');let {data,error}=await cloudClient.auth.signUp({email,password});if(error)throw error;authMessage(data.session?'Account created and signed in.':'Account created. Email verification අවශ්‍ය නම් email එක බලන්න.')}catch(e){authMessage(e.message)}}
+async function cloudSignIn(){try{let {data,error}=await cloudClient.auth.signInWithPassword({email:$('authEmail').value.trim(),password:$('authPassword').value});if(error)throw error;cloudUser=data.user;await cloudPull();$('authBox').style.display='none';cloudStatus('Cloud Sync සක්‍රියයි · '+cloudUser.email)}catch(e){authMessage(e.message)}}
+async function cloudSignOut(){await cloudClient.auth.signOut();cloudUser=null;$('authBox').style.display='block';cloudStatus('Cloud logout වුණා. Local data පවතී.')}
+async function cloudPull(){
+ if(!cloudUser)return;
+ const uid=cloudUser.id;
+ const [lr,pr,sr]=await Promise.all([
+  cloudClient.from('gold_loans').select('*').eq('user_id',uid).order('loan_no'),
+  cloudClient.from('gold_loan_payments').select('*').eq('user_id',uid).order('paid_date'),
+  cloudClient.from('gold_loan_settings').select('*').eq('user_id',uid).maybeSingle()
+ ]);
+ if(lr.error)throw lr.error;if(pr.error)throw pr.error;if(sr.error)throw sr.error;
+ if(lr.data.length){
+   s.loans=lr.data.map(r=>({name:r.loan_name,balance:Number(r.opening_balance),rate:Number(r.monthly_rate),pawn:r.pawn_date,due:r.due_date,lastPaid:r.last_paid_date,unpaidInterest:Number(r.unpaid_interest),verified:r.verified}));
+   s.payments=pr.data.map(r=>({loan:r.loan_no-1,date:r.paid_date,amount:Number(r.amount),interest:Number(r.interest),fees:Number(r.fees),principal:Number(r.principal),after:Number(r.balance_after),note:r.note||'',receiptPath:r.receipt_path||null,historical:r.is_historical}));
+   if(sr.data)s.budget=Number(sr.data.monthly_budget);
+   localStorage.setItem(KEY,JSON.stringify(s));buildFields();render();
+ } else {
+   await cloudPush(); // first signed-in device uploads the existing local starter data
+ }
+}
+async function cloudPush(){
+ if(!cloudUser)return;
+ const uid=cloudUser.id;
+ const loans=s.loans.map((l,i)=>({user_id:uid,loan_no:i+1,loan_name:l.name,opening_balance:l.balance,monthly_rate:l.rate,pawn_date:l.pawn||null,due_date:l.due||null,last_paid_date:l.lastPaid||null,unpaid_interest:l.unpaidInterest||0,verified:!!l.verified}));
+ const {error:le}=await cloudClient.from('gold_loans').upsert(loans,{onConflict:'user_id,loan_no'});if(le)throw le;
+ const {error:de}=await cloudClient.from('gold_loan_payments').delete().eq('user_id',uid);if(de)throw de;
+ if(s.payments.length){const rows=s.payments.map((p,i)=>({user_id:uid,loan_no:p.loan+1,paid_date:p.date,amount:p.amount,interest:p.interest,fees:p.fees,principal:p.principal,balance_after:p.after,note:p.note||null,receipt_path:p.receiptPath||null,is_historical:!!p.historical,client_order:i}));const {error:pe}=await cloudClient.from('gold_loan_payments').insert(rows);if(pe)throw pe}
+ const {error:se}=await cloudClient.from('gold_loan_settings').upsert({user_id:uid,monthly_budget:s.budget},{onConflict:'user_id'});if(se)throw se;
+ cloudStatus('Cloud Sync සාර්ථකයි · '+new Date().toLocaleTimeString());
+}
+cloudClient.auth.getSession().then(async({data})=>{if(data.session){cloudUser=data.session.user;try{await cloudPull();$('authBox').style.display='none';cloudStatus('Cloud Sync සක්‍රියයි · '+cloudUser.email)}catch(e){cloudStatus('Cloud error: '+e.message)}}});
+cloudClient.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){cloudUser=null;$('authBox').style.display='block';cloudStatus('Cloud logout වුණා')}});
+
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active')}));
+$('pDate').value=new Date().toISOString().slice(0,10);buildFields();render();
+</script></body></html>
